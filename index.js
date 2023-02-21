@@ -1,4 +1,4 @@
-const { prompt } = require("inquirer");
+const inquirer = require("inquirer");
 const logo = require("asciiart-logo");
 const db = require("./db");
 require("console.table");
@@ -6,70 +6,72 @@ require("console.table");
 function init() {
   const logoText = logo({ name: "Employee Manager" }).render();
   console.log(logoText);
-  loadMainPrompts();
+  menu();
 }
 
-function loadMainPrompts() {
-  prompt([
-    {
-      type: "list",
-      name: "choices",
-      message: "What would you like to do?",
-      choices: [
-        {
-          name: "View All Employees",
-          value: "VIEWEMPLOYEES",
-        },
-        {
-          name: "Add Employee",
-          value: "ADDEMPLOYEE",
-        },
-        {
-          name: "View All Roles",
-          value: "VIEWROLES",
-        },
-        {
-          name: "Add Role",
-          value: "ADDROLE",
-        },
-        {
-          name: "View All Departments",
-          value: "VIEWDEPARTMENTS",
-        },
-        {
-          name: "Add Department",
-          value: "ADDDEPARTMENT",
-        },
-        {
-          name: "Quit",
-          value: "QUIT",
-        },
-      ],
-    },
-  ]).then((res) => {
-    switch (res.choices) {
-      case "VIEWEMPLOYEES":
-        viewAllEmployees();
-        break;
-      case "ADDEMPLOYEE":
-        addEmployee();
-        break;
-      case "VIEWDEPARTMENTS":
-        viewAllDepartments();
-        break;
-      case "ADDDEPARTMENT":
-        addDepartment();
-        break;
-      case "VIEWROLES":
-        viewAllRoles();
-        break;
-      case "ADDROLE":
-        addRole();
-        break;
-      default:
-        quit();
-    }
-  });
+function menu() {
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "choices",
+        message: "What would you like to do?",
+        choices: [
+          {
+            name: "View All Employees",
+            value: "VIEWEMPLOYEES",
+          },
+          {
+            name: "Add Employee",
+            value: "ADDEMPLOYEE",
+          },
+          {
+            name: "View All Roles",
+            value: "VIEWROLES",
+          },
+          {
+            name: "Add Role",
+            value: "ADDROLE",
+          },
+          {
+            name: "View All Departments",
+            value: "VIEWDEPARTMENTS",
+          },
+          {
+            name: "Add Department",
+            value: "ADDDEPARTMENT",
+          },
+          {
+            name: "Quit",
+            value: "QUIT",
+          },
+        ],
+      },
+    ])
+    .then((res) => {
+      switch (res.choices) {
+        case "VIEWEMPLOYEES":
+          viewAllEmployees();
+          break;
+        case "ADDEMPLOYEE":
+          addEmployee();
+          break;
+        case "VIEWDEPARTMENTS":
+          viewAllDepartments();
+          break;
+        case "ADDDEPARTMENT":
+          addDepartment();
+          break;
+        case "VIEWROLES":
+          viewAllRoles();
+          break;
+        case "ADDROLE":
+          addRole();
+          break;
+        default:
+          quit();
+      }
+    });
 }
 
 // VIEW FUNCTIONS

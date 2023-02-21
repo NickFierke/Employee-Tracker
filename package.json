@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/NickFierke/Employee-Tracker#readme",
   "dependencies": {
+    "asciiart-logo": "^0.2.7",
+    "console.table": "^0.10.0",
     "inquirer": "^8.2.5"
   }
 }
